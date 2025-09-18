@@ -2,5 +2,6 @@
 
 #include <iostream>
 #include <string>
+#include <math.h>
 
-void find_num(std::string);
+long long find_num(std::string);
