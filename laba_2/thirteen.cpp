@@ -1,6 +1,8 @@
 #include "thirteen.h"
 
-Thirteen::Thirteen(): __array('0', '\0') {}
+Thirteen::Thirteen() {
+    __array.push_back((unsigned char)'0');
+}
 
 Thirteen::Thirteen(const ULL_T& int_10) {
     __from_10_to_13(int_10);
@@ -12,8 +14,16 @@ Thirteen::Thirteen(const std::string& int_str) {
 
 Thirteen::Thirteen(const Thirteen& other): __array(other.__array) {}
 
-Thirteen::Thirteen(Thirteen&& other) {
+Thirteen& Thirteen::operator=(Thirteen&& other) noexcept {
+    if (this != &other) {
+        __array = std::move(other.__array);
+        other.__array.clear();
+    }
+    return *this;
 }
+
+Thirteen::Thirteen(Thirteen&& other) noexcept: 
+    __array(std::move(other.__array)) {}
 
 std::vector<unsigned char> Thirteen::get_as_array() const {
     return __array;
@@ -26,6 +36,42 @@ std::string Thirteen::get_as_string() const {
         ans += __array[i];
     }
     return ans;
+}
+
+Thirteen Thirteen::operator+(const Thirteen& rhs) const {
+    return Thirteen();
+}
+
+Thirteen Thirteen::operator-(const Thirteen& rhs) const {
+    return Thirteen();
+}
+
+bool Thirteen::operator>(const Thirteen& rhs) const {
+    int n1 = __array.size(), n2 = rhs.__array.size();
+    if (n1 < n2) {
+        return false;
+    } else {
+        if (n1 > n2) return true;
+    }
+    for (int i = n1 - 1; i >= 0; --i) {
+        if (__array[i] > rhs.__array[i]) return true;
+    }
+    return false;
+}
+
+bool Thirteen::operator<(const Thirteen& rhs) const {
+    return !(*this > rhs) && !(*this == rhs);
+}
+
+bool Thirteen::operator==(const Thirteen& rhs) const {
+    int n1 = __array.size(), n2 = rhs.__array.size();
+    if (n1 != n2) {
+        return false;
+    }
+    for (int i = n1 - 1; i >= 0; --i) {
+        if (__array[i] != rhs.__array[i]) return false;
+    }
+    return true;
 }
 
 void Thirteen::__from_10_to_13(const ULL_T& int_10) {

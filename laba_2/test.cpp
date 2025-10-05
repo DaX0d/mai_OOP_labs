@@ -3,6 +3,15 @@
 
 TEST(test_1, basic_test_set) {
     ASSERT_EQ(Thirteen(13).get_as_string(), std::string("10"));
+    std::vector<unsigned char> th = Thirteen("123").get_as_array();
+    ASSERT_EQ(th[0], '3'); ASSERT_EQ(th[1], '2'); ASSERT_EQ(th[2], '1');
+}
+
+TEST(test_2, basic_test_set) {
+    ASSERT_TRUE(Thirteen("13") > Thirteen(13));
+    ASSERT_FALSE(Thirteen(13) > Thirteen(13));
+    ASSERT_TRUE(Thirteen() == Thirteen("0"));
+    ASSERT_TRUE(Thirteen(7) < Thirteen(8));
 }
 
 int main(int argc, char **argv) {
