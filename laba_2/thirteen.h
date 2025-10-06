@@ -21,7 +21,7 @@ public:
 
     std::vector<UC_T> get_as_array() const; // ✅
     std::string get_as_string() const; // ✅
-    ULL_T get_as_int10() const;
+    ULL_T get_as_int10() const; // ✅
 
     Thirteen operator + (const Thirteen& rhs) const;
     Thirteen operator - (const Thirteen& rhs) const;

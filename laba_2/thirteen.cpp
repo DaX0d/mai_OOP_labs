@@ -50,7 +50,35 @@ ULL_T Thirteen::get_as_int10() const {
 }
 
 Thirteen Thirteen::operator+(const Thirteen& rhs) const {
-    return Thirteen(this->get_as_int10() + rhs.get_as_int10());
+    const UC_T alphabet[] = "0123456789ABC";
+    int n1 = __array.size(), n2 = rhs.__array.size(),
+        n = std::max(n1, n2);
+    Thirteen ans;
+    ans.__array.clear();
+
+    int sum = 0,
+        tmp = 0,
+        a, b;
+    for (int i = 0; i < n; ++i) {
+        if (i < n1) {
+            UC_T ch = __array[i];
+            a = (ch < (UC_T)'A') ? (ch - (UC_T)'0') : (10 + ch - (UC_T)'A');
+        } else {
+            a = 0;
+        }
+        if (i < n2) {
+            UC_T ch = rhs.__array[i];
+            b = (ch < (UC_T)'A') ? (ch - (UC_T)'0') : (10 + ch - (UC_T)'A');
+        } else {
+            b = 0;
+        }
+        sum = a + b + tmp;
+        tmp = sum / 13;
+        ans.__array.push_back(alphabet[sum % 13]);
+    }
+    if (tmp) ans.__array.push_back(alphabet[tmp]);
+
+    return ans;
 }
 
 Thirteen Thirteen::operator-(const Thirteen& rhs) const {
