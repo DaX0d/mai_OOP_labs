@@ -1,5 +1,11 @@
 #include "thirteen.h"
 
+
+static int int_from_char(const UC_T& ch) {
+    return (ch < (UC_T)'A') ? (ch - (UC_T)'0') : (10 + ch - (UC_T)'A');
+}
+
+
 Thirteen::Thirteen() {
     __array.push_back((UC_T)'0');
 }
@@ -43,7 +49,7 @@ ULL_T Thirteen::get_as_int10() const {
     int n = __array.size();
     for (int i = 0; i < n; ++i) {
         UC_T ch = __array[i];
-        short val = (ch < (UC_T)'A') ? (ch - (UC_T)'0') : (10 + ch - (UC_T)'A');
+        int val = int_from_char(ch);
         ans += val * pow(13, i);
     }
     return ans;
@@ -62,13 +68,13 @@ Thirteen Thirteen::operator+(const Thirteen& rhs) const {
     for (int i = 0; i < n; ++i) {
         if (i < n1) {
             UC_T ch = __array[i];
-            a = (ch < (UC_T)'A') ? (ch - (UC_T)'0') : (10 + ch - (UC_T)'A');
+            a = int_from_char(ch);
         } else {
             a = 0;
         }
         if (i < n2) {
             UC_T ch = rhs.__array[i];
-            b = (ch < (UC_T)'A') ? (ch - (UC_T)'0') : (10 + ch - (UC_T)'A');
+            b = int_from_char(ch);
         } else {
             b = 0;
         }
@@ -82,7 +88,36 @@ Thirteen Thirteen::operator+(const Thirteen& rhs) const {
 }
 
 Thirteen Thirteen::operator-(const Thirteen& rhs) const {
-    return Thirteen();
+    if (*this < rhs) throw std::exception();
+
+    const UC_T alphabet[] = "0123456789ABC";
+    int n1 = __array.size(), n2 = rhs.__array.size();
+    Thirteen ans;
+    ans.__array.clear();
+
+    int tmp = 0, a, b;
+    for (int i = 0; i < n1; ++i) {
+        a = int_from_char(__array[i]);
+        if (i < n2) {
+            b = int_from_char(rhs.__array[i]);
+        } else {
+            b = 0;
+        }
+
+        if (a < b) {
+            a += 13;
+            tmp = 1;
+        } else {
+            tmp = 0;
+        }
+
+        ans.__array.push_back(alphabet[a - b]);
+    }
+    while (ans.__array.size() > 1 && ans.__array.back() == (UC_T)'0') {
+        ans.__array.pop_back();
+    }
+    
+    return ans;
 }
 
 Thirteen Thirteen::operator+=(const Thirteen& rhs) {
