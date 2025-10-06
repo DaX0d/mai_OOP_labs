@@ -12,6 +12,7 @@ TEST(test_2, basic_test_set) {
     ASSERT_FALSE(Thirteen(13) > Thirteen(13));
     ASSERT_TRUE(Thirteen() == Thirteen("0"));
     ASSERT_TRUE(Thirteen(7) < Thirteen(8));
+    ASSERT_TRUE(Thirteen("C") == Thirteen(12));
 }
 
 int main(int argc, char **argv) {

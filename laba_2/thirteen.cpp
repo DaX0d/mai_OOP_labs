@@ -46,6 +46,14 @@ Thirteen Thirteen::operator-(const Thirteen& rhs) const {
     return Thirteen();
 }
 
+Thirteen Thirteen::operator+=(const Thirteen& rhs) {
+    return Thirteen();
+}
+
+Thirteen Thirteen::operator-=(const Thirteen& rhs) {
+    return Thirteen();
+}
+
 bool Thirteen::operator>(const Thirteen& rhs) const {
     int n1 = __array.size(), n2 = rhs.__array.size();
     if (n1 < n2) {
@@ -60,18 +68,11 @@ bool Thirteen::operator>(const Thirteen& rhs) const {
 }
 
 bool Thirteen::operator<(const Thirteen& rhs) const {
-    return !(*this > rhs) && !(*this == rhs);
+    return rhs > *this;
 }
 
 bool Thirteen::operator==(const Thirteen& rhs) const {
-    int n1 = __array.size(), n2 = rhs.__array.size();
-    if (n1 != n2) {
-        return false;
-    }
-    for (int i = n1 - 1; i >= 0; --i) {
-        if (__array[i] != rhs.__array[i]) return false;
-    }
-    return true;
+    return __array == rhs.__array;
 }
 
 void Thirteen::__from_10_to_13(const ULL_T& int_10) {

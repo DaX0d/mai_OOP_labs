@@ -15,13 +15,16 @@ public:
     Thirteen(Thirteen&& other) noexcept; // ✅
     virtual ~Thirteen() noexcept {}; // ✅
 
-    Thirteen& operator=(Thirteen&& other) noexcept; // ✅
+    Thirteen& operator = (Thirteen&& other) noexcept; // ✅
 
     std::vector<unsigned char> get_as_array() const; // ✅
     std::string get_as_string() const; // ✅
 
     Thirteen operator + (const Thirteen& rhs) const;
     Thirteen operator - (const Thirteen& rhs) const;
+
+    Thirteen operator += (const Thirteen& rhs);
+    Thirteen operator -= (const Thirteen& rhs);
 
     bool operator > (const Thirteen& rhs) const; // ✅
     bool operator < (const Thirteen& rhs) const; // ✅
