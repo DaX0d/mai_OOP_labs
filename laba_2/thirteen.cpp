@@ -97,7 +97,7 @@ Thirteen Thirteen::operator-(const Thirteen& rhs) const {
 
     int tmp = 0, a, b;
     for (int i = 0; i < n1; ++i) {
-        a = int_from_char(__array[i]);
+        a = int_from_char(__array[i]) - tmp;
         if (i < n2) {
             b = int_from_char(rhs.__array[i]);
         } else {
@@ -121,11 +121,11 @@ Thirteen Thirteen::operator-(const Thirteen& rhs) const {
 }
 
 Thirteen Thirteen::operator+=(const Thirteen& rhs) {
-    return Thirteen();
+    return *this = *this + rhs;
 }
 
 Thirteen Thirteen::operator-=(const Thirteen& rhs) {
-    return Thirteen();
+    return *this = *this - rhs;
 }
 
 bool Thirteen::operator>(const Thirteen& rhs) const {
