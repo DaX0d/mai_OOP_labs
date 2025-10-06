@@ -1,7 +1,7 @@
 #include "thirteen.h"
 
 Thirteen::Thirteen() {
-    __array.push_back((unsigned char)'0');
+    __array.push_back((UC_T)'0');
 }
 
 Thirteen::Thirteen(const ULL_T& int_10) {
@@ -25,7 +25,7 @@ Thirteen& Thirteen::operator=(Thirteen&& other) noexcept {
 Thirteen::Thirteen(Thirteen&& other) noexcept: 
     __array(std::move(other.__array)) {}
 
-std::vector<unsigned char> Thirteen::get_as_array() const {
+std::vector<UC_T> Thirteen::get_as_array() const {
     return __array;
 }
 
@@ -38,8 +38,19 @@ std::string Thirteen::get_as_string() const {
     return ans;
 }
 
+ULL_T Thirteen::get_as_int10() const {
+    ULL_T ans = 0;
+    int n = __array.size();
+    for (int i = 0; i < n; ++i) {
+        UC_T ch = __array[i];
+        short val = (ch < (UC_T)'A') ? (ch - (UC_T)'0') : (10 + ch - (UC_T)'A');
+        ans += val * pow(13, i);
+    }
+    return ans;
+}
+
 Thirteen Thirteen::operator+(const Thirteen& rhs) const {
-    return Thirteen();
+    return Thirteen(this->get_as_int10() + rhs.get_as_int10());
 }
 
 Thirteen Thirteen::operator-(const Thirteen& rhs) const {
@@ -80,7 +91,7 @@ void Thirteen::__from_10_to_13(const ULL_T& int_10) {
         __array.push_back('0');
         return;
     }
-    const unsigned char alphabet[] = "0123456789ABC";
+    const UC_T alphabet[] = "0123456789ABC";
     ULL_T tmp = int_10;
     while (tmp > 0) {
         int digit = (tmp % 13);
@@ -98,6 +109,6 @@ void Thirteen::__from_str_to_13(const std::string& str_int) {
             && !(ch >= 'A' && ch <= 'C')
         ) throw std::exception();
 
-        __array.push_back((unsigned char)ch);
+        __array.push_back((UC_T)ch);
     }
 }

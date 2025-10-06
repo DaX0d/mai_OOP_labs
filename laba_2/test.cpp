@@ -15,6 +15,10 @@ TEST(test_2, basic_test_set) {
     ASSERT_TRUE(Thirteen("C") == Thirteen(12));
 }
 
+TEST(test_3, basic_test_set) {
+    ASSERT_EQ((Thirteen(5) + Thirteen(10)).get_as_array(), Thirteen(15).get_as_array());
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
