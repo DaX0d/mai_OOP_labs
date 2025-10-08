@@ -8,11 +8,11 @@ TEST(test_1, basic_test_set) {
 }
 
 TEST(test_2, basic_test_set) {
-    ASSERT_TRUE(Thirteen("13") > Thirteen(13));
-    ASSERT_FALSE(Thirteen(13) > Thirteen(13));
-    ASSERT_TRUE(Thirteen() == Thirteen("0"));
-    ASSERT_TRUE(Thirteen(7) < Thirteen(8));
-    ASSERT_TRUE(Thirteen("C") == Thirteen(12));
+    ASSERT_TRUE(Thirteen("13").more(Thirteen(13)));
+    ASSERT_FALSE(Thirteen(13).more(Thirteen(13)));
+    ASSERT_TRUE(Thirteen().eq(Thirteen("0")));
+    ASSERT_TRUE(Thirteen(7).less(Thirteen(8)));
+    ASSERT_TRUE(Thirteen("C").eq(Thirteen(12)));
 }
 
 TEST(test_3, basic_test_set) {

@@ -27,9 +27,9 @@ public:
     Thirteen pluseq(const Thirteen& rhs); // ✅
     Thirteen minuseq(const Thirteen& rhs); // ✅
 
-    bool operator > (const Thirteen& rhs) const; // ✅
-    bool operator < (const Thirteen& rhs) const; // ✅
-    bool operator == (const Thirteen& rhs) const; // ✅
+    bool more(const Thirteen& rhs) const; // ✅
+    bool less(const Thirteen& rhs) const; // ✅
+    bool eq(const Thirteen& rhs) const; // ✅
 
 private:
     std::vector<UC_T> __array;

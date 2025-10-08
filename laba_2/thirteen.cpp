@@ -80,7 +80,7 @@ Thirteen Thirteen::plus(const Thirteen& rhs) const {
 }
 
 Thirteen Thirteen::minus(const Thirteen& rhs) const {
-    if (*this < rhs) throw std::exception();
+    if (this->more(rhs)) throw std::exception();
 
     const UC_T alphabet[] = "0123456789ABC";
     int n1 = __array.size(), n2 = rhs.__array.size();
@@ -124,7 +124,7 @@ Thirteen Thirteen::minuseq(const Thirteen& rhs) {
     return *this;
 }
 
-bool Thirteen::operator>(const Thirteen& rhs) const {
+bool Thirteen::more(const Thirteen& rhs) const {
     int n1 = __array.size(), n2 = rhs.__array.size();
     if (n1 < n2) {
         return false;
@@ -137,11 +137,11 @@ bool Thirteen::operator>(const Thirteen& rhs) const {
     return false;
 }
 
-bool Thirteen::operator<(const Thirteen& rhs) const {
-    return rhs > *this;
+bool Thirteen::less(const Thirteen& rhs) const {
+    return rhs.more(*this);
 }
 
-bool Thirteen::operator==(const Thirteen& rhs) const {
+bool Thirteen::eq(const Thirteen& rhs) const {
     return __array == rhs.__array;
 }
 
