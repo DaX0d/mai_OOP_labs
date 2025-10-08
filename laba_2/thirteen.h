@@ -17,17 +17,15 @@ public:
     Thirteen(Thirteen&& other) noexcept; // ✅
     virtual ~Thirteen() noexcept {}; // ✅
 
-    Thirteen& operator = (Thirteen&& other) noexcept; // ✅
-
     std::vector<UC_T> get_as_array() const; // ✅
     std::string get_as_string() const; // ✅
     ULL_T get_as_int10() const; // ✅
 
-    Thirteen operator + (const Thirteen& rhs) const; // ✅
-    Thirteen operator - (const Thirteen& rhs) const; // ✅
+    Thirteen plus(const Thirteen& rhs) const; // ✅
+    Thirteen minus(const Thirteen& rhs) const; // ✅
 
-    Thirteen operator += (const Thirteen& rhs); // ✅
-    Thirteen operator -= (const Thirteen& rhs); // ✅
+    Thirteen pluseq(const Thirteen& rhs); // ✅
+    Thirteen minuseq(const Thirteen& rhs); // ✅
 
     bool operator > (const Thirteen& rhs) const; // ✅
     bool operator < (const Thirteen& rhs) const; // ✅

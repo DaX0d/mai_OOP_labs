@@ -20,14 +20,6 @@ Thirteen::Thirteen(const std::string& int_str) {
 
 Thirteen::Thirteen(const Thirteen& other): __array(other.__array) {}
 
-Thirteen& Thirteen::operator=(Thirteen&& other) noexcept {
-    if (this != &other) {
-        __array = std::move(other.__array);
-        other.__array.clear();
-    }
-    return *this;
-}
-
 Thirteen::Thirteen(Thirteen&& other) noexcept: 
     __array(std::move(other.__array)) {}
 
@@ -55,7 +47,7 @@ ULL_T Thirteen::get_as_int10() const {
     return ans;
 }
 
-Thirteen Thirteen::operator+(const Thirteen& rhs) const {
+Thirteen Thirteen::plus(const Thirteen& rhs) const {
     const UC_T alphabet[] = "0123456789ABC";
     int n1 = __array.size(), n2 = rhs.__array.size(),
         n = std::max(n1, n2);
@@ -87,7 +79,7 @@ Thirteen Thirteen::operator+(const Thirteen& rhs) const {
     return ans;
 }
 
-Thirteen Thirteen::operator-(const Thirteen& rhs) const {
+Thirteen Thirteen::minus(const Thirteen& rhs) const {
     if (*this < rhs) throw std::exception();
 
     const UC_T alphabet[] = "0123456789ABC";
@@ -120,12 +112,16 @@ Thirteen Thirteen::operator-(const Thirteen& rhs) const {
     return ans;
 }
 
-Thirteen Thirteen::operator+=(const Thirteen& rhs) {
-    return *this = *this + rhs;
+Thirteen Thirteen::pluseq(const Thirteen& rhs) {
+    Thirteen tmp = this->plus(rhs);
+    __array = std::move(tmp.__array);
+    return *this;
 }
 
-Thirteen Thirteen::operator-=(const Thirteen& rhs) {
-    return *this = *this - rhs;
+Thirteen Thirteen::minuseq(const Thirteen& rhs) {
+    Thirteen tmp = this->minus(rhs);
+    __array = std::move(tmp.__array);
+    return *this;
 }
 
 bool Thirteen::operator>(const Thirteen& rhs) const {

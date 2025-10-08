@@ -17,7 +17,7 @@ static void print_menu() {
 }
 
 int main() {
-    Thirteen number;
+    Thirteen* number = new Thirteen();
     std::string tmp_str;
     ULL_T tmp_int;
     char choice;
@@ -30,21 +30,24 @@ int main() {
                 std::cout << "\nВведите число: ";
                 std::cin >> tmp_str;
                 tmp_int = std::stoull(tmp_str);
-                number = Thirteen(tmp_int);
+                delete number;
+                number = new Thirteen(tmp_int);
             break;
             case '2':
                 std::cout << "\nВведите число: ";
                 std::cin >> tmp_str;
-                number = Thirteen(tmp_str);
+                delete number;
+                number = new Thirteen(tmp_str);
             break;
             case '3':
-                std::cout << number.get_as_string();
+                std::cout << number->get_as_string();
             break;
             case '4':
-                std::cout << number.get_as_int10();
+                std::cout << number->get_as_int10();
             break;
         }
     }
-
+    
+    delete number;
     return 0;
 }

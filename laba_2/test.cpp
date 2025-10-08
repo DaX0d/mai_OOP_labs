@@ -16,8 +16,8 @@ TEST(test_2, basic_test_set) {
 }
 
 TEST(test_3, basic_test_set) {
-    ASSERT_EQ((Thirteen(5) + Thirteen(10)).get_as_array(), Thirteen(15).get_as_array());
-    ASSERT_EQ((Thirteen(13) - Thirteen("10")).get_as_int10(), 0);
+    ASSERT_EQ((Thirteen(5).plus(Thirteen(10))).get_as_array(), Thirteen(15).get_as_array());
+    ASSERT_EQ((Thirteen(13).minus(Thirteen("10"))).get_as_int10(), 0);
 }
 
 int main(int argc, char **argv) {
