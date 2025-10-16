@@ -8,6 +8,7 @@ public:
 
     float x() const {return __x;}
     float y() const {return __y;}
+    float len() const;
 
     Point operator+(const Point& rhs) const;
     Point operator-(const Point& rhs) const;
@@ -15,6 +16,7 @@ public:
 
     bool operator==(const Point& rhs) const;
     bool operator!=(const Point& rhs) const {return !(*this == rhs);}
+    
 private:
     float __x;
     float __y;
