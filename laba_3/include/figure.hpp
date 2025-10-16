@@ -8,10 +8,15 @@
 class Figure {
 public:
     Figure() = default;
+    Figure(std::vector<Point>& points);
+    Figure(const Figure& fig);
+    Figure(Figure&& fig);
     virtual ~Figure() {}
 
-    virtual Point center() const;
+    virtual Figure operator=(Figure&& rhs);
+    virtual bool operator==(const Figure& rhs) const;
 
+    virtual Point center() const;
     virtual operator double() const;
 
     friend std::ostream& operator<<(std::ostream& out, Figure& fig) {return fig.__write(out);}
