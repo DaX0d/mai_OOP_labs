@@ -16,8 +16,8 @@ public:
     virtual Figure& operator=(const Figure& rhs);
     virtual bool operator==(const Figure& rhs) const;
 
-    virtual Point center() const;
-    virtual operator double() const;
+    virtual Point center() const {return Point();}
+    virtual operator double() const {return -1;}
 
     friend std::ostream& operator<<(std::ostream& out, Figure& fig) {return fig.__write(out);}
     friend std::istream& operator>>(std::istream& inp, Figure& fig) {return fig.__read(inp);}
@@ -25,6 +25,6 @@ public:
 protected:
     std::vector<Point> __points;
 
-    virtual std::ostream& __write(std::ostream& out) const;
-    virtual std::istream& __read(std::istream& inp);
+    virtual std::ostream& __write(std::ostream& out) const {return out;}
+    virtual std::istream& __read(std::istream& inp) {return inp;}
 };

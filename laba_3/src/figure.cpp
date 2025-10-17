@@ -18,3 +18,7 @@ Figure& Figure::operator=(const Figure& rhs) {
     }
     return *this;
 }
+
+bool Figure::operator==(const Figure& rhs) const {
+    return (__points.size() == rhs.__points.size()) && (static_cast<double>(*this) == static_cast<double>(rhs));
+}
