@@ -13,7 +13,7 @@ public:
     Figure(Figure&& fig);
     virtual ~Figure() {}
 
-    virtual Figure operator=(Figure&& rhs);
+    virtual Figure& operator=(const Figure& rhs);
     virtual bool operator==(const Figure& rhs) const;
 
     virtual Point center() const;
