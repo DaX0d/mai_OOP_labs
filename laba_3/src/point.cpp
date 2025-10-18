@@ -1,7 +1,9 @@
 #include "../include/point.hpp"
 
+#include <math.h>
+
 double Point::len() const {
-    return __x * __x + __y * __y;
+    return std::sqrt(__x * __x + __y * __y);
 }
 
 Point Point::operator+(const Point& rhs) const {
