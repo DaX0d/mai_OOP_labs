@@ -14,4 +14,7 @@ public:
 protected:
     virtual std::ostream& __write(std::ostream& out) const override;
     virtual std::istream& __read(std::istream& inp) override;
+
+private:
+    void __check_rhomb() const;
 };

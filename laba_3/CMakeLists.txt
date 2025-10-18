@@ -20,7 +20,7 @@ FetchContent_MakeAvailable(googletest)
 add_library(${CMAKE_PROJECT_NAME}_lib src/rhomb.cpp src/pentagon.cpp src/hexagon.cpp src/point.cpp src/figure.cpp)
 add_executable(${CMAKE_PROJECT_NAME} src/main.cpp)
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_PROJECT_NAME}_lib)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_PROJECT_NAME}_lib m)
 
 enable_testing()
 add_executable(tests src/test.cpp)
