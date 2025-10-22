@@ -8,8 +8,8 @@ public:
     Rhomb(std::vector<Point>& points);
     virtual ~Rhomb() {};
 
-    virtual Point center() const override;
-    virtual operator double() const override;
+    // virtual Point center() const override;
+    // virtual operator double() const override;
 
 protected:
     virtual std::ostream& __write(std::ostream& out) const override;

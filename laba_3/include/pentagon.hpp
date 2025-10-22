@@ -8,8 +8,8 @@ public:
     Pentagon(std::vector<Point>& points);
     virtual ~Pentagon() {}
 
-    virtual Point center() const override;
-    virtual operator double() const override;
+    // virtual Point center() const override;
+    // virtual operator double() const override;
 
 protected:
     virtual std::ostream& __write(std::ostream& out) const override;

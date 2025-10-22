@@ -12,25 +12,32 @@ Pentagon::Pentagon(std::vector<Point>& points):
     __check_pentagon();
 }
 
-Point Pentagon::center() const {
-    return Point();
-}
+// Point Pentagon::center() const {
+//     return Point();
+// }
 
-Pentagon::operator double() const {
-    return -1;
-}
+// Pentagon::operator double() const {
+//     return -1;
+// }
 
 std::ostream& Pentagon::__write(std::ostream& out) const {
-    out << "Pentagon((" << __points[0].x() << ", " << __points[1].y() << ")";
+    out << "Pentagon{(" << __points[0].x() << ", " << __points[1].y() << ")";
     for (int i = 1; i < 5; ++i) {
         out << ", (";
         out << __points[i].x() << ", " << __points[i].y() << ")";
     }
-    out << ")\n";
+    out << "}\n";
     return out;
 }
 
 std::istream& Pentagon::__read(std::istream& inp) {
+    __points.clear();
+    for (int i = 0; i < 5; ++i) {
+        double tx, ty;
+        inp >> tx, ty;
+        __points.push_back(Point(tx, ty));
+    }
+    __check_pentagon();
     return inp;
 }
 
