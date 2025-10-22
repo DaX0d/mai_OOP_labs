@@ -1,5 +1,7 @@
 #include "../include/pentagon.hpp"
 
+#include <cmath>
+
 Pentagon::Pentagon():
     Figure()
 {}
@@ -37,17 +39,24 @@ void Pentagon::__check_pentagon() const {
         throw std::invalid_argument("Wrong count of poins for pentagon");
     }
 
-    Point side1 = __points[1] - __points[0],
-          side2 = __points[2] - __points[1],
-          side3 = __points[3] - __points[2],
-          side4 = __points[4] - __points[3],
-          side5 = __points[0] - __points[4];
+    const double EPS = 1e-6;
 
-    if (side1.len() == 0
-     || side1.len() != side2.len()
-     || side1.len() != side3.len()
-     || side1.len() != side4.len()
-     || side1.len() != side5.len()) {
-        throw std::invalid_argument("Wrong length of sides in pentagon");
+    double len1 = (__points[1] - __points[0]).len();
+    for (int i = 1; i < 5; ++i) {
+        double len = (__points[(i + 1) % 5] - __points[i]).len();
+        if (std::fabs(len - len1) > EPS)
+            throw std::invalid_argument("Wrong length of sides in pentagon");
+    }
+
+    double prev_cross = 0;
+    for (int i = 0; i < 5; ++i) {
+        Point a = __points[i];
+        Point b = __points[(i + 1) % 5];
+        Point c = __points[(i + 2) % 5];
+        double cross = (b.x() - a.x()) * (c.y() - b.y()) - (b.y() - a.y()) * (c.x() - b.x());
+        if (i == 0)
+            prev_cross = cross;
+        else if (cross * prev_cross < -EPS)
+            throw std::invalid_argument("Pentagon is not convex");
     }
 }
