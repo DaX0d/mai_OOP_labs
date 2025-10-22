@@ -49,7 +49,8 @@ void Rhomb::__check_rhomb() const {
           side3 = __points[3] - __points[2],
           side4 = __points[0] - __points[3];
 
-    if (side1.len() != side2.len()
+    if (side1.len() == 0
+     || side1.len() != side2.len()
      || side2.len() != side3.len()
      || side3.len() != side4.len())
     {
