@@ -1,3 +1,5 @@
+#pragma once
+
 #include "figure.hpp"
 
 class Pentagon: public Figure {
