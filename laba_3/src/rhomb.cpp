@@ -30,6 +30,7 @@ std::ostream& Rhomb::__write(std::ostream& out) const {
 }
 
 std::istream& Rhomb::__read(std::istream& inp) {
+    __points.clear();
     for (int i = 0; i < 4; ++i) {
         double tx, ty;
         inp >> tx >> ty;
