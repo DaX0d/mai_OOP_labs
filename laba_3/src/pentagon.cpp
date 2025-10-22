@@ -19,6 +19,12 @@ Pentagon::operator double() const {
 }
 
 std::ostream& Pentagon::__write(std::ostream& out) const {
+    out << "Pentagon((" << __points[0].x() << ", " << __points[1].y() << ")";
+    for (int i = 1; i < 5; ++i) {
+        out << ", (";
+        out << __points[i].x() << ", " << __points[i].y() << ")";
+    }
+    out << ")\n";
     return out;
 }
 
