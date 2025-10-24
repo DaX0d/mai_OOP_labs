@@ -7,7 +7,7 @@
 
 const double EPS = 1e-6;
 
-TEST(test_1, rhomb_tests) {
+TEST(rhomb_tests, test_1) {
     std::vector<Point> points = {Point(0, 1), Point(1, 2), Point(2, 1), Point(1, 0)};
     Rhomb rhomb(points);
     std::cout << rhomb;
@@ -15,13 +15,13 @@ TEST(test_1, rhomb_tests) {
     ASSERT_EQ(static_cast<double>(rhomb), 2);
 }
 
-TEST(test_2, rhomb_tests) {
+TEST(rhomb_tests, test_2) {
     std::vector<Point> points1 = {Point(0, 1), Point(1, 2), Point(2, 1), Point(1, 0)};
     std::vector<Point> points2 = {Point(3, 2.5), Point(4, 3.5), Point(5, 2.5), Point(4, 1.5)};
     ASSERT_EQ(Rhomb(points1), Rhomb(points2));
 }
 
-TEST(test_3, pentagon_tests) {
+TEST(pentagon_tests, test_1) {
     const double R = 1.0;
     std::vector<Point> pentagon;
     for (int i = 0; i < 5; ++i) {
@@ -39,7 +39,7 @@ TEST(test_3, pentagon_tests) {
     ASSERT_NEAR(area, expected, 1e-6);
 }
 
-TEST(test_4, pentagon_tests) {
+TEST(pentagon_tests, test_2) {
     std::vector<Point> p1, p2;
 
     const double R = 1.5;
@@ -56,7 +56,7 @@ TEST(test_4, pentagon_tests) {
     ASSERT_EQ(Pentagon(p1), Pentagon(p2));
 }
 
-TEST(test_5, hexagon_tests) {
+TEST(hexagon_tests, test_1) {
     const double R = 2;
     std::vector<Point> hexagon;
     for (int i = 0; i < 6; ++i) {
@@ -75,7 +75,7 @@ TEST(test_5, hexagon_tests) {
     ASSERT_NEAR(area, expected, EPS);
 }
 
-TEST(test_6, hexagon_tests) {
+TEST(hexagon_tests, test_2) {
     const double R = 2;
     std::vector<Point> h1, h2;
     for (int i = 0; i < 6; ++i) {
@@ -83,7 +83,7 @@ TEST(test_6, hexagon_tests) {
         h1.push_back(Point(R * std::cos(angle) + 1, R * std::sin(angle) - 1));
     }
     for (int i = 0; i < 6; ++i) {
-        double angle = 2 * M_PI * i / 6;
+        double angle = 2 * M_PI * i / 6 + M_PI / 2;
         h2.push_back(Point(R * std::cos(angle) - 1, R * std::sin(angle) + 1));
     }
     ASSERT_EQ(Hexagon(h1), Hexagon(h2));
