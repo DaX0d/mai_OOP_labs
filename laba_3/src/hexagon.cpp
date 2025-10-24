@@ -22,7 +22,7 @@ std::istream& Hexagon::__read(std::istream& inp) {
     __points.clear();
     for (int i = 0; i < 6; ++i) {
         double tx, ty;
-        inp >> tx, ty;
+        inp >> tx >> ty;
         __points.push_back(Point(tx, ty));
     }
     __check_hexagon();

@@ -34,7 +34,7 @@ std::istream& Pentagon::__read(std::istream& inp) {
     __points.clear();
     for (int i = 0; i < 5; ++i) {
         double tx, ty;
-        inp >> tx, ty;
+        inp >> tx >> ty;
         __points.push_back(Point(tx, ty));
     }
     __check_pentagon();
