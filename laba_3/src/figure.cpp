@@ -1,4 +1,5 @@
 #include "../include/figure.hpp"
+#include <cmath>
 
 Figure::Figure(std::vector<Point>& points):
     __points(points)
@@ -20,7 +21,9 @@ Figure& Figure::operator=(const Figure& rhs) {
 }
 
 bool Figure::operator==(const Figure& rhs) const {
-    return (__points.size() == rhs.__points.size()) && (static_cast<double>(*this) == static_cast<double>(rhs));
+    const double EPS = 1e-6;
+    return (__points.size() == rhs.__points.size())
+        && (std::fabs(static_cast<double>(*this) - static_cast<double>(rhs)) <= EPS);
 }
 
 Point Figure::center() const {
