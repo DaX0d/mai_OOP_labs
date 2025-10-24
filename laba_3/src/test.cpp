@@ -89,6 +89,38 @@ TEST(hexagon_tests, test_2) {
     ASSERT_EQ(Hexagon(h1), Hexagon(h2));
 }
 
+TEST(test_7, polymorphism_works) {
+    std::vector<std::unique_ptr<Figure>> figures;
+
+    std::vector<Point> r_points = {
+        Point(0, 1), Point(1, 2), Point(2, 1), Point(1, 0)
+    };
+    figures.push_back(std::make_unique<Rhomb>(r_points));
+
+    std::vector<Point> p_points;
+    for (int i = 0; i < 5; ++i) {
+        double angle = 2 * M_PI * i / 5;
+        p_points.emplace_back(std::cos(angle), std::sin(angle));
+    }
+    figures.push_back(std::make_unique<Pentagon>(p_points));
+
+    std::vector<Point> h_points;
+    for (int i = 0; i < 6; ++i) {
+        double angle = 2 * M_PI * i / 6;
+        h_points.push_back(Point(std::cos(angle), std::sin(angle)));
+    }
+    figures.push_back(std::make_unique<Hexagon>(h_points));
+
+    for (const auto& fig : figures) {
+        Point c = fig->center();
+        double area = static_cast<double>(*fig);
+
+        ASSERT_TRUE(std::isfinite(c.x()));
+        ASSERT_TRUE(std::isfinite(c.y()));
+        ASSERT_GT(area, 0.0);
+    }
+}
+
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
