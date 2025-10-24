@@ -47,7 +47,7 @@ TEST(test_4, pentagon_tests) {
         double angle = 2 * M_PI * i / 5;
         p1.push_back(Point(R * std::cos(angle), R * std::sin(angle)));
     }
-    
+
     for (int i = 0; i < 5; ++i) {
         double angle = 2 * M_PI * i / 5;
         p2.push_back(Point(R * std::cos(angle) + 5, R * std::sin(angle) - 7));
@@ -56,6 +56,38 @@ TEST(test_4, pentagon_tests) {
     ASSERT_EQ(Pentagon(p1), Pentagon(p2));
 }
 
+TEST(test_5, hexagon_tests) {
+    const double R = 2;
+    std::vector<Point> hexagon;
+    for (int i = 0; i < 6; ++i) {
+        double angle = 2 * M_PI * i / 6;
+        hexagon.push_back(Point(R * std::cos(angle), R * std::sin(angle)));
+    }
+    Hexagon h(hexagon);
+    std::cout << h;
+
+    Point c = h.center();
+    ASSERT_NEAR(c.x(), 0, EPS);
+    ASSERT_NEAR(c.y(), 0, EPS);
+
+    double area = static_cast<double>(h);
+    double expected = 3 * std::sqrt(3) / 2 * R * R;
+    ASSERT_NEAR(area, expected, EPS);
+}
+
+TEST(test_6, hexagon_tests) {
+    const double R = 2;
+    std::vector<Point> h1, h2;
+    for (int i = 0; i < 6; ++i) {
+        double angle = 2 * M_PI * i / 6;
+        h1.push_back(Point(R * std::cos(angle) + 1, R * std::sin(angle) - 1));
+    }
+    for (int i = 0; i < 6; ++i) {
+        double angle = 2 * M_PI * i / 6;
+        h2.push_back(Point(R * std::cos(angle) - 1, R * std::sin(angle) + 1));
+    }
+    ASSERT_EQ(Hexagon(h1), Hexagon(h2));
+}
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
